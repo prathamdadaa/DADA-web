@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DADA | Welcome</title>
+    <title>DADA | IGNOU BCA Portal</title>
     <style>
-        /* Reset and Base Styles */
+        /* Reset and Base Theme Setup */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            background-color: #121212;
-            color: #ffffff;
-            overflow: hidden; /* Prevents scrolling during loading */
+            background-color: #0d0f12;
+            color: #f0f2f5;
+            overflow: hidden; /* Prevent scrolling during loading */
         }
 
         /* --- LOADING SCREEN STYLES --- */
@@ -42,11 +42,9 @@
             text-transform: uppercase;
             opacity: 0;
             transform: scale(0.95);
-            /* Combined animation: Fade/Scale up, then expand letter spacing */
             animation: introEffect 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
         }
 
-        /* Dramatic text animation */
         @keyframes introEffect {
             0% {
                 opacity: 0;
@@ -61,19 +59,18 @@
             }
             100% {
                 opacity: 1;
-                letter-spacing: 1.5rem; /* Expands the text elegantly */
+                letter-spacing: 1.5rem;
                 transform: scale(1);
             }
         }
 
-        /* Class added via JS to dismiss the loader */
         #loader.fade-out {
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
         }
 
-        /* --- MAIN CONTENT STYLES --- */
+        /* --- MAIN PORTAL STYLES --- */
         #main-content {
             opacity: 0;
             transform: translateY(20px);
@@ -81,28 +78,177 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem;
-            text-align: center;
         }
 
-        /* Class added via JS to reveal main content */
         #main-content.reveal {
             opacity: 1;
             transform: translateY(0);
         }
 
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            font-weight: 300;
+        header {
+            background: linear-gradient(135deg, #161b22, #0d1117);
+            padding: 2.5rem 2rem;
+            text-align: center;
+            border-bottom: 1px solid #21262d;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
         }
 
-        p {
-            color: #a0a0a0;
-            max-width: 600px;
-            line-height: 1.6;
+        header h1 {
+            font-size: 2.5rem;
+            color: #ffffff;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        header h1 span {
+            color: #58a6ff;
+        }
+
+        header p {
+            color: #8b949e;
+            font-size: 1.1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            width: 100%;
+            flex: 1;
+        }
+
+        /* Navigation Filter Tabs */
+        .tabs-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .tab-btn {
+            background-color: #161b22;
+            color: #c9d1d9;
+            border: 1px solid #30363d;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn:hover {
+            background-color: #21262d;
+            border-color: #8b949e;
+        }
+
+        .tab-btn.active {
+            background-color: #1f6feb;
+            color: #ffffff;
+            border-color: #58a6ff;
+            box-shadow: 0 0 12px rgba(31, 111, 235, 0.4);
+        }
+
+        /* Materials Dynamic Grid */
+        .grid-section {
+            display: none;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .grid-section.active-grid {
+            display: grid;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .subject-card {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 10px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .subject-card:hover {
+            transform: translateY(-4px);
+            border-color: #58a6ff;
+        }
+
+        .card-header {
+            margin-bottom: 1.25rem;
+        }
+
+        .course-code {
+            display: inline-block;
+            background-color: rgba(88, 166, 255, 0.15);
+            color: #58a6ff;
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .card-header h3 {
+            font-size: 1.25rem;
+            color: #f0f2f5;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .action-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .btn-download {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #21262d;
+            color: #c9d1d9;
+            text-decoration: none;
+            padding: 0.6rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid #30363d;
+            transition: all 0.2s ease;
+        }
+
+        .btn-download:hover {
+            background-color: #30363d;
+            color: #ffffff;
+        }
+
+        .btn-download.primary-doc {
+            background: #238636;
+            color: #ffffff;
+            border-color: #2ea44f;
+        }
+
+        .btn-download.primary-doc:hover {
+            background: #2ea44f;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #8b949e;
+            border-top: 1px solid #21262d;
+            font-size: 0.9rem;
+            background-color: #090c10;
         }
     </style>
 </head>
@@ -113,30 +259,255 @@
         <div class="loader-logo">DADA</div>
     </div>
 
-    <!-- Main Website Content -->
+    <!-- Main Website Portal Content -->
     <div id="main-content">
-        <h1>hello my name is pratham dada</h1>
-        <p>bca doing web project .</p>
+        <header>
+            <h1><span>BCA</span> Digital Study Repository</h1>
+            <p>Access IGNOU reference books, assignments guidelines, and previous year structures</p>
+        </header>
+
+        <div class="container">
+            <!-- Semester Navigation Tabs -->
+            <div class="tabs-container">
+                <button class="tab-btn active" onclick="switchSem('sem1')">Semester 1</button>
+                <button class="tab-btn" onclick="switchSem('sem2')">Semester 2</button>
+                <button class="tab-btn" onclick="switchSem('sem3')">Semester 3</button>
+                <button class="tab-btn" onclick="switchSem('sem4')">Semester 4</button>
+                <button class="tab-btn" onclick="switchSem('sem5')">Semester 5</button>
+                <button class="tab-btn" onclick="switchSem('sem6')">Semester 6</button>
+            </div>
+
+            <!-- SEMESTER 1 -->
+            <div id="sem1" class="grid-section active-grid">
+                <div class="subject-card">
+                    <div class="card-header">
+                        <span class="course-code">BCS-011</span>
+                        <h3>Computer Basics and PC Software</h3>
+                    </div>
+                    <div class="action-links">
+                        <a href="https://egyankosh.ac.in/" target="_blank" class="btn-download primary-doc">Download Textbook (eGyankosh)</a>
+                        <a href="#" class="btn-download">Chapter-wise PDF Notes</a>
+                        <a href="#" class="btn-download">Solved Assignments</a>
+                    </div>
+                </div>
+                <div class="subject-card">
+                    <div class="card-header">
+                        <span class="course-code">BCS-012</span>
+                        <h3>Basic Mathematics</h3>
+                    </div>
+                    <div class="action-links">
+                        <a href="https://egyankosh.ac.in/" target="_blank" class="btn-download primary-doc">Download Textbook (eGyankosh)</a>
+                        <a href="#" class="btn-download">Formula Guide & Notes</a>
+                        <a href="#" class="btn-download">Past Year Papers (PYQs)</a>
+                    </div>
+                </div>
+                <div class="subject-card">
+                    <div class="card-header">
+                        <span class="course-code">BEGLA-136</span>
+                        <h3>English at the Workplace</h3>
+                    </div>
+                    <div class="action-links">
+                        <a href="https://egyankosh.ac.in/" target="_blank" class="btn-download primary-doc">Download Official Book</a>
+                        <a href="#" class="btn-download">Syllabus & Notes</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEMESTER 2 -->
+            <div id="sem2" class="grid-section">
+                <div class="subject-card">
+                    <div class="card-header">
+                        <span class="course-code">MCS-201</span>
+                        <h3>Programming in C and Python</h3>
+                    </div>
+                    <div class="action-links">
+                        <a href="https://egyankosh.ac.in/" target="_blank" class="btn-download primary-doc">Download Reference Book</a>
+                        <a href="#" class="btn-download">C & Python Lab Manual</a>
+                        <a href="#" class="btn-download">Important Practice Codes</a>
+                    </div>
+                </div>
+                <div class="subject-card">
+                    <div class="card-header">
+                        <span class="course-code">MCS-202</span>
+                        <h3>Computer Organisation</h3>
+                    </div>
+                    <div class="action-links">
+                        <a href="https://egyankosh.ac.in/" target="_blank" class="btn-download primary-doc">Download Material</a>
+                        <a href="#" class="btn-download">Architecture Notes</a>
+                    </div>
+                </div>
+                <div class="subject-card">
+                    <div class="card-header">
+                        <span class="course-code">MCS-203</span>
+                        <h3>Operating Systems</h3>
+                    </div>
+                    <div class="action-links">
+                        <a href="https://egyankosh.ac.in/" target="_blank" class="btn-download primary-doc">Download Material</a>
+                        <a href="#" class="btn-download">OS Core Concepts PDF</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEMESTER 3 -->
+            <div id="sem3" class="grid-section">
+                <div class="subject-card">
+                    <div class="card-header">
+                        <span class="course-code">MCS-208</span>
+                        <h3>Data Structures and Algorithms</h3>
+                    </div>
+                    <div class="action-links">
+                        <a href="https://egyankosh.ac.in/" target="_blank" class="btn-download primary-doc">Download Help Book</a>
+                        <a href="#" class="btn-download">Algorithm Design Notes</a>
+                        <a href="#" class="btn-download">Data Structures Lab</a>
+                    </div>
+                </div>
+                <div class="subject-card">
+                    <div class="card-header">
+                        <span class="course-code">MCS-207</span>
+                        <h3>Database Management Systems</h3>
+                    </div>
+                    <div class="action-links">
+                        <a href="https://egyankosh.ac.in/" target="_blank" class="btn-download primary-doc">Download DBMS Book</a>
+                        <a href="#" class="btn-download">SQL Query Guide</a>
+                    </div>
+                </div>
+                <div class="subject-card">
+                    <div class="card-header">
+                        <span class="course-code">BCS-131</span>
+                        <h3>Programming in C++</h3>
+                    </div>
+                    <div class="action-links">
+                        <a href="https://egyankosh.ac.in/" target="_blank" class="btn-download primary-doc">Download Book PDF</a>
+                        <a href="#" class="btn-download">OOPs Concepts Guide</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEMESTER 4 -->
+            <div id="sem4" class="grid-section">
+                <div class="subject-card">
+                    <div class="card-header">
+                        <span class="course-code">MCS-206</span>
+                        <h3>Object Oriented Programming using Java</h3>
+                    </div>
+                    <div class="action-links">
+                        <a href="https://egyankosh.ac.in/" target="_blank" class="btn-download primary-doc">Download Textbook</a>
+                        <a href="#" class="btn-download">Java Lab Question Set</a>
+                    </div>
+                </div>
+                <div class="subject-card">
+                    <div class="card-header">
+                        <span class="course-code">BCS-041</span>
+                        <h3>Fundamentals of Computer Networks</h3>
+                    </div>
+                    <div class="action-links">
+                        <a href="https://egyankosh.ac.in/" target="_blank" class="btn-download primary-doc">Download Textbook</a>
+                        <a href="#" class="btn-download">Networking Solved Notes</a>
+                    </div>
+                </div>
+                <div class="subject-card">
+                    <div class="card-header">
+                        <span class="course-code">BCS-053</span>
+                        <h3>Web Programming</h3>
+                    </div>
+                    <div class="action-links">
+                        <a href="https://egyankosh.ac.in/" target="_blank" class="btn-download primary-doc">Download Study Material</a>
+                        <a href="#" class="btn-download">HTML/CSS/JS Cheat Sheets</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEMESTER 5 -->
+            <div id="sem5" class="grid-section">
+                <div class="subject-card">
+                    <div class="card-header">
+                        <span class="course-code">BCS-151</span>
+                        <h3>Introduction to Software Engineering</h3>
+                    </div>
+                    <div class="action-links">
+                        <a href="https://egyankosh.ac.in/" target="_blank" class="btn-download primary-doc">Download Official Book</a>
+                        <a href="#" class="btn-download">SDLC Reference Notes</a>
+                    </div>
+                </div>
+                <div class="subject-card">
+                    <div class="card-header">
+                        <span class="course-code">BCS-042</span>
+                        <h3>Introduction to Algorithm Design</h3>
+                    </div>
+                    <div class="action-links">
+                        <a href="https://egyankosh.ac.in/" target="_blank" class="btn-download primary-doc">Download Textbook</a>
+                        <a href="#" class="btn-download">Advanced Complexities PDF</a>
+                    </div>
+                </div>
+                <div class="subject-card">
+                    <div class="card-header">
+                        <span class="course-code">BCOS-184</span>
+                        <h3>E-Commerce</h3>
+                    </div>
+                    <div class="action-links">
+                        <a href="https://egyankosh.ac.in/" target="_blank" class="btn-download primary-doc">Download Material</a>
+                        <a href="#" class="btn-download">E-Commerce Architecture</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEMESTER 6 -->
+            <div id="sem6" class="grid-section">
+                <div class="subject-card">
+                    <div class="card-header">
+                        <span class="course-code">BCOS-185</span>
+                        <h3>Entrepreneurship</h3>
+                    </div>
+                    <div class="action-links">
+                        <a href="https://egyankosh.ac.in/" target="_blank" class="btn-download primary-doc">Download Study Material</a>
+                        <a href="#" class="btn-download">Business Implementation Guide</a>
+                    </div>
+                </div>
+                <div class="subject-card">
+                    <div class="card-header">
+                        <span class="course-code">BCSP-064</span>
+                        <h3>BCA Project Work Guidelines</h3>
+                    </div>
+                    <div class="action-links">
+                        <a href="http://www.ignou.ac.in" target="_blank" class="btn-download primary-doc">Download Synopsis Template</a>
+                        <a href="#" class="btn-download">Sample Project Reports</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2026 DADA Digital Portals. Curated for IGNOU Computer Science Applications.</p>
+        </footer>
     </div>
 
     <script>
+        // Loading Delay Sequence Execution
         window.addEventListener('DOMContentLoaded', () => {
             const loader = document.getElementById('loader');
             const mainContent = document.getElementById('main-content');
 
-            // Force the loading screen to display for at least 3 seconds 
-            // so the user can fully experience the visual effect.
             setTimeout(() => {
-                // Fade out the black screen
                 loader.classList.add('fade-out');
-                
-                // Bring in the main content smoothly
                 mainContent.classList.add('reveal');
-                
-                // Restore scrolling to the page
-                document.body.style.overflow = 'auto';
+                document.body.style.overflow = 'auto'; // Re-enable window scrolling
             }, 3000); 
         });
+
+        // Semester Dynamic Switch Script
+        function switchSem(semId) {
+            // Remove active status from all grids
+            const sections = document.querySelectorAll('.grid-section');
+            sections.forEach(sec => sec.classList.remove('active-grid'));
+
+            // Remove active status from all button triggers
+            const tabs = document.querySelectorAll('.tab-btn');
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            // Set current targeting objects as active
+            document.getElementById(semId).classList.add('active-grid');
+            event.currentTarget.classList.add('active');
+        }
     </script>
 </body>
 </html>
