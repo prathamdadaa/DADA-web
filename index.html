@@ -120,6 +120,22 @@
             flex: 1;
         }
 
+        /* --- NOTICE BANNER --- */
+        .notice-banner {
+            background: linear-gradient(90deg, rgba(56,139,253,0.12), rgba(46,164,79,0.08));
+            border: 1px solid #30363d;
+            border-left: 4px solid #d29922;
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+            color: #c9d1d9;
+            line-height: 1.5;
+        }
+
+        .notice-banner strong { color: #f0f3f6; }
+        .notice-banner a { color: #58a6ff; }
+
         /* --- ROUTINE COMPONENT STYLES --- */
         .routine-section {
             background-color: #111418;
@@ -195,7 +211,7 @@
             grid-template-columns: repeat(3, 1fr);
             gap: 0.6rem;
             margin-bottom: 2rem;
-            max-width: 700px;
+            max-width: 900px;
             margin-left: auto;
             margin-right: auto;
         }
@@ -232,9 +248,16 @@
             box-shadow: 0 0 15px rgba(31, 111, 235, 0.35);
         }
 
+        .sem-summary {
+            text-align: center;
+            color: #7d8590;
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+        }
+
         .grid-section {
             display: none;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
             gap: 1.5rem;
         }
 
@@ -269,6 +292,14 @@
             margin-bottom: 1.5rem;
         }
 
+        .code-row {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 0.75rem;
+        }
+
         .course-code {
             display: inline-block;
             background-color: rgba(56, 139, 253, 0.12);
@@ -277,11 +308,30 @@
             font-weight: 700;
             padding: 0.3rem 0.65rem;
             border-radius: 4px;
-            margin-bottom: 0.75rem;
+        }
+
+        .course-credit {
+            display: inline-block;
+            background-color: rgba(46, 164, 79, 0.12);
+            color: #3fb950;
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 0.3rem 0.55rem;
+            border-radius: 4px;
+        }
+
+        .course-type {
+            display: inline-block;
+            background-color: rgba(188, 140, 255, 0.12);
+            color: #bc8cff;
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 0.3rem 0.55rem;
+            border-radius: 4px;
         }
 
         .card-header h3 {
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             color: #f0f3f6;
             font-weight: 600;
             line-height: 1.4;
@@ -323,6 +373,16 @@
             background: #2ea44f;
         }
 
+        .btn-download.assignment-doc {
+            background: #1f6feb;
+            color: #ffffff;
+            border-color: #388bfd;
+        }
+
+        .btn-download.assignment-doc:hover {
+            background: #388bfd;
+        }
+
         footer {
             text-align: center;
             padding: 2.5rem;
@@ -331,6 +391,8 @@
             font-size: 0.85rem;
             background-color: #0b0d10;
         }
+
+        footer a { color: #58a6ff; text-decoration: none; }
     </style>
 </head>
 <body>
@@ -344,11 +406,15 @@
     <div id="main-content">
         <header>
             <h1><span>BCA</span> Architecture & Study Repository</h1>
-            <p>Unified structural catalog providing direct access to curriculum frameworks, timeline execution maps, and reference structures.</p>
+            <p>Unified structural catalog providing direct access to curriculum frameworks, timeline execution maps, and reference structures — mapped to IGNOU's official BCA_NEW (ODL) programme structure.</p>
         </header>
 
         <div class="container">
-            
+
+            <div class="notice-banner">
+                <strong>How this hub links to material:</strong> Every subject card below reflects IGNOU's official 39-course BCA_NEW curriculum (6 semesters, 99 credits). The green button opens an <strong>eGyanKosh</strong> search pre-filled with that exact course code — eGyanKosh is IGNOU's official free repository of Self-Learning Material PDFs. The blue button opens IGNOU's <strong>official Assignments</strong> portal. I can't host or fabricate "notes"/"solved assignment" PDFs myself since those aren't real files I have access to — but these two links get you the genuine, official source for every course. Full programme guide: <a href="https://www.ignou.ac.in/viewFile/SOCIS/programmeguide/BCA-NEW-July-2024.pdf" target="_blank">BCA-NEW Programme Guide (PDF)</a>.
+            </div>
+
             <!-- DAILY ROUTINE PANEL -->
             <div class="routine-section">
                 <h2 class="section-title">🕒 BCA Student <span>Daily Routine Blueprint</span></h2>
@@ -366,7 +432,7 @@
                     <div class="routine-card rest">
                         <span class="time-tag">02:00 PM - 04:30 PM</span>
                         <h4>BCA Assignment Processing</h4>
-                        <p>Work on mandatory IGNOU continuous evaluation logs, document compilation, or structure project synopses (BCSP-064).</p>
+                        <p>Work on mandatory IGNOU continuous evaluation logs, document compilation, or structure project synopses (BCSP-165).</p>
                     </div>
                     <div class="routine-card coding">
                         <span class="time-tag">06:00 PM - 08:30 PM</span>
@@ -390,198 +456,510 @@
 
             <!-- SEMESTER 1 -->
             <div id="sem1" class="grid-section active-grid">
+                <p class="sem-summary" style="grid-column:1/-1;">6 courses · 26 credits</p>
+
                 <div class="subject-card">
                     <div class="card-header">
-                        <span class="course-code">BCS-011</span>
+                        <div class="code-row">
+                            <span class="course-code">BCS-111</span>
+                            <span class="course-credit">4 Cr</span>
+                            <span class="course-type">Theory</span>
+                        </div>
                         <h3>Computer Basics and PC Software</h3>
                     </div>
                     <div class="action-links">
-                        <a href="https://egyankosh.ac.in/" target="_blank" class="btn-download primary-doc">Official eGyankosh Textbook</a>
-                        <a href="#" class="btn-download">Core Chapter Notes</a>
-                        <a href="#" class="btn-download">Solved Assignments</a>
+                        <a href="https://egyankosh.ac.in/simple-search?query=BCS-111" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
                     </div>
                 </div>
+
                 <div class="subject-card">
                     <div class="card-header">
-                        <span class="course-code">BCS-012</span>
+                        <div class="code-row">
+                            <span class="course-code">BCS-012</span>
+                            <span class="course-credit">4 Cr</span>
+                            <span class="course-type">Theory</span>
+                        </div>
                         <h3>Basic Mathematics</h3>
                     </div>
                     <div class="action-links">
-                        <a href="https://egyankosh.ac.in/" target="_blank" class="btn-download primary-doc">Official eGyankosh Textbook</a>
-                        <a href="#" class="btn-download">Formula Blueprint Guide</a>
-                        <a href="#" class="btn-download">Previous Year PYQs</a>
+                        <a href="https://egyankosh.ac.in/simple-search?query=BCS-012" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
                     </div>
                 </div>
+
                 <div class="subject-card">
                     <div class="card-header">
-                        <span class="course-code">BEGLA-136</span>
+                        <div class="code-row">
+                            <span class="course-code">BCSL-013</span>
+                            <span class="course-credit">2 Cr</span>
+                            <span class="course-type">Practical</span>
+                        </div>
+                        <h3>Computer Basics and PC Software Lab</h3>
+                    </div>
+                    <div class="action-links">
+                        <a href="https://egyankosh.ac.in/simple-search?query=BCSL-013" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
+                    </div>
+                </div>
+
+                <div class="subject-card">
+                    <div class="card-header">
+                        <div class="code-row">
+                            <span class="course-code">FEG-02</span>
+                            <span class="course-credit">4 Cr</span>
+                            <span class="course-type">Theory</span>
+                        </div>
+                        <h3>Foundation Course in English-2</h3>
+                    </div>
+                    <div class="action-links">
+                        <a href="https://egyankosh.ac.in/simple-search?query=FEG-02" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
+                    </div>
+                </div>
+
+                <div class="subject-card">
+                    <div class="card-header">
+                        <div class="code-row">
+                            <span class="course-code">BEVAE-181</span>
+                            <span class="course-credit">4 Cr</span>
+                            <span class="course-type">Theory</span>
+                        </div>
+                        <h3>Environmental Studies</h3>
+                    </div>
+                    <div class="action-links">
+                        <a href="https://egyankosh.ac.in/simple-search?query=BEVAE-181" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
+                    </div>
+                </div>
+
+                <div class="subject-card">
+                    <div class="card-header">
+                        <div class="code-row">
+                            <span class="course-code">BEGLA-136</span>
+                            <span class="course-credit">6 Cr</span>
+                            <span class="course-type">Theory</span>
+                        </div>
                         <h3>English at the Workplace</h3>
                     </div>
                     <div class="action-links">
-                        <a href="https://egyankosh.ac.in/" target="_blank" class="btn-download primary-doc">Download Textbook</a>
-                        <a href="#" class="btn-download">Syllabus Breakdown</a>
+                        <a href="https://egyankosh.ac.in/simple-search?query=BEGLA-136" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
                     </div>
                 </div>
             </div>
 
             <!-- SEMESTER 2 -->
             <div id="sem2" class="grid-section">
+                <p class="sem-summary" style="grid-column:1/-1;">5 courses · 16 credits</p>
+
                 <div class="subject-card">
                     <div class="card-header">
-                        <span class="course-code">MCS-201</span>
+                        <div class="code-row">
+                            <span class="course-code">MCS-201</span>
+                            <span class="course-credit">4 Cr</span>
+                            <span class="course-type">Theory</span>
+                        </div>
                         <h3>Programming in C and Python</h3>
                     </div>
                     <div class="action-links">
-                        <a href="https://egyankosh.ac.in/" target="_blank" class="btn-download primary-doc">Official Reference Book</a>
-                        <a href="#" class="btn-download">C & Python Lab Handbooks</a>
-                        <a href="#" class="btn-download">Core Executable Source Codes</a>
+                        <a href="https://egyankosh.ac.in/simple-search?query=MCS-201" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
                     </div>
                 </div>
+
                 <div class="subject-card">
                     <div class="card-header">
-                        <span class="course-code">MCS-202</span>
+                        <div class="code-row">
+                            <span class="course-code">MCSL-205</span>
+                            <span class="course-credit">2 Cr</span>
+                            <span class="course-type">Practical</span>
+                        </div>
+                        <h3>C and Python Lab</h3>
+                    </div>
+                    <div class="action-links">
+                        <a href="https://egyankosh.ac.in/simple-search?query=MCSL-205" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
+                    </div>
+                </div>
+
+                <div class="subject-card">
+                    <div class="card-header">
+                        <div class="code-row">
+                            <span class="course-code">MCS-202</span>
+                            <span class="course-credit">4 Cr</span>
+                            <span class="course-type">Theory</span>
+                        </div>
                         <h3>Computer Organisation</h3>
                     </div>
                     <div class="action-links">
-                        <a href="https://egyankosh.ac.in/" target="_blank" class="btn-download primary-doc">Official Reference Book</a>
-                        <a href="#" class="btn-download">Architecture Logic Diagrams</a>
+                        <a href="https://egyankosh.ac.in/simple-search?query=MCS-202" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
                     </div>
                 </div>
+
                 <div class="subject-card">
                     <div class="card-header">
-                        <span class="course-code">MCS-203</span>
+                        <div class="code-row">
+                            <span class="course-code">MCS-203</span>
+                            <span class="course-credit">4 Cr</span>
+                            <span class="course-type">Theory</span>
+                        </div>
                         <h3>Operating Systems</h3>
                     </div>
                     <div class="action-links">
-                        <a href="https://egyankosh.ac.in/" target="_blank" class="btn-download primary-doc">Official Reference Book</a>
-                        <a href="#" class="btn-download">OS Memory Management Notes</a>
+                        <a href="https://egyankosh.ac.in/simple-search?query=MCS-203" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
+                    </div>
+                </div>
+
+                <div class="subject-card">
+                    <div class="card-header">
+                        <div class="code-row">
+                            <span class="course-code">MCSL-204</span>
+                            <span class="course-credit">2 Cr</span>
+                            <span class="course-type">Practical</span>
+                        </div>
+                        <h3>Windows and Linux Lab</h3>
+                    </div>
+                    <div class="action-links">
+                        <a href="https://egyankosh.ac.in/simple-search?query=MCSL-204" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
                     </div>
                 </div>
             </div>
 
             <!-- SEMESTER 3 -->
             <div id="sem3" class="grid-section">
+                <p class="sem-summary" style="grid-column:1/-1;">5 courses · 16 credits</p>
+
                 <div class="subject-card">
                     <div class="card-header">
-                        <span class="course-code">MCS-208</span>
+                        <div class="code-row">
+                            <span class="course-code">MCS-208</span>
+                            <span class="course-credit">4 Cr</span>
+                            <span class="course-type">Theory</span>
+                        </div>
                         <h3>Data Structures and Algorithms</h3>
                     </div>
                     <div class="action-links">
-                        <a href="https://egyankosh.ac.in/" target="_blank" class="btn-download primary-doc">Official Reference Book</a>
-                        <a href="#" class="btn-download">Data Tree & Graph Logic Notes</a>
-                        <a href="#" class="btn-download">Algorithm Complexity Sets</a>
+                        <a href="https://egyankosh.ac.in/simple-search?query=MCS-208" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
                     </div>
                 </div>
+
                 <div class="subject-card">
                     <div class="card-header">
-                        <span class="course-code">MCS-207</span>
+                        <div class="code-row">
+                            <span class="course-code">MCSL-209</span>
+                            <span class="course-credit">2 Cr</span>
+                            <span class="course-type">Practical</span>
+                        </div>
+                        <h3>Data Structures and Algorithms Lab</h3>
+                    </div>
+                    <div class="action-links">
+                        <a href="https://egyankosh.ac.in/simple-search?query=MCSL-209" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
+                    </div>
+                </div>
+
+                <div class="subject-card">
+                    <div class="card-header">
+                        <div class="code-row">
+                            <span class="course-code">MCS-207</span>
+                            <span class="course-credit">4 Cr</span>
+                            <span class="course-type">Theory</span>
+                        </div>
                         <h3>Database Management Systems</h3>
                     </div>
                     <div class="action-links">
-                        <a href="https://egyankosh.ac.in/" target="_blank" class="btn-download primary-doc">Official Reference Book</a>
-                        <a href="#" class="btn-download">SQL Normalization Guides</a>
+                        <a href="https://egyankosh.ac.in/simple-search?query=MCS-207" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
                     </div>
                 </div>
+
                 <div class="subject-card">
                     <div class="card-header">
-                        <span class="course-code">BCS-131</span>
+                        <div class="code-row">
+                            <span class="course-code">BCS-131</span>
+                            <span class="course-credit">4 Cr</span>
+                            <span class="course-type">Theory</span>
+                        </div>
                         <h3>Programming in C++</h3>
                     </div>
                     <div class="action-links">
-                        <a href="https://egyankosh.ac.in/" target="_blank" class="btn-download primary-doc">Official Reference Book</a>
-                        <a href="#" class="btn-download">Object-Oriented Logic Sets</a>
+                        <a href="https://egyankosh.ac.in/simple-search?query=BCS-131" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
+                    </div>
+                </div>
+
+                <div class="subject-card">
+                    <div class="card-header">
+                        <div class="code-row">
+                            <span class="course-code">BCSL-135</span>
+                            <span class="course-credit">2 Cr</span>
+                            <span class="course-type">Practical</span>
+                        </div>
+                        <h3>DBMS and C++ Lab</h3>
+                    </div>
+                    <div class="action-links">
+                        <a href="https://egyankosh.ac.in/simple-search?query=BCSL-135" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
                     </div>
                 </div>
             </div>
 
             <!-- SEMESTER 4 -->
             <div id="sem4" class="grid-section">
+                <p class="sem-summary" style="grid-column:1/-1;">8 courses · 26 credits</p>
+
                 <div class="subject-card">
                     <div class="card-header">
-                        <span class="course-code">MCS-206</span>
+                        <div class="code-row">
+                            <span class="course-code">MCS-206</span>
+                            <span class="course-credit">4 Cr</span>
+                            <span class="course-type">Theory</span>
+                        </div>
                         <h3>Object Oriented Programming using Java</h3>
                     </div>
                     <div class="action-links">
-                        <a href="https://egyankosh.ac.in/" target="_blank" class="btn-download primary-doc">Official Reference Book</a>
-                        <a href="#" class="btn-download">Java Exception & Multi-thread Codes</a>
+                        <a href="https://egyankosh.ac.in/simple-search?query=MCS-206" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
                     </div>
                 </div>
+
                 <div class="subject-card">
                     <div class="card-header">
-                        <span class="course-code">BCS-041</span>
+                        <div class="code-row">
+                            <span class="course-code">BCSL-146</span>
+                            <span class="course-credit">2 Cr</span>
+                            <span class="course-type">Practical</span>
+                        </div>
+                        <h3>Object Oriented Programming using Java Lab</h3>
+                    </div>
+                    <div class="action-links">
+                        <a href="https://egyankosh.ac.in/simple-search?query=BCSL-146" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
+                    </div>
+                </div>
+
+                <div class="subject-card">
+                    <div class="card-header">
+                        <div class="code-row">
+                            <span class="course-code">BCS-041</span>
+                            <span class="course-credit">4 Cr</span>
+                            <span class="course-type">Theory</span>
+                        </div>
                         <h3>Fundamentals of Computer Networks</h3>
                     </div>
                     <div class="action-links">
-                        <a href="https://egyankosh.ac.in/" target="_blank" class="btn-download primary-doc">Official Reference Book</a>
-                        <a href="#" class="btn-download">TCP/IP Layer Protocol Handout</a>
+                        <a href="https://egyankosh.ac.in/simple-search?query=BCS-041" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
                     </div>
                 </div>
+
                 <div class="subject-card">
                     <div class="card-header">
-                        <span class="course-code">BCS-053</span>
+                        <div class="code-row">
+                            <span class="course-code">BCS-042</span>
+                            <span class="course-credit">2 Cr</span>
+                            <span class="course-type">Theory</span>
+                        </div>
+                        <h3>Introduction to Algorithm Design</h3>
+                    </div>
+                    <div class="action-links">
+                        <a href="https://egyankosh.ac.in/simple-search?query=BCS-042" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
+                    </div>
+                </div>
+
+                <div class="subject-card">
+                    <div class="card-header">
+                        <div class="code-row">
+                            <span class="course-code">BCS-053</span>
+                            <span class="course-credit">2 Cr</span>
+                            <span class="course-type">Theory</span>
+                        </div>
                         <h3>Web Programming</h3>
                     </div>
                     <div class="action-links">
-                        <a href="https://egyankosh.ac.in/" target="_blank" class="btn-download primary-doc">Official Reference Book</a>
-                        <a href="#" class="btn-download">HTML/CSS/JS Cheat Sheets</a>
+                        <a href="https://egyankosh.ac.in/simple-search?query=BCS-053" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
+                    </div>
+                </div>
+
+                <div class="subject-card">
+                    <div class="card-header">
+                        <div class="code-row">
+                            <span class="course-code">BCSL-147</span>
+                            <span class="course-credit">2 Cr</span>
+                            <span class="course-type">Practical</span>
+                        </div>
+                        <h3>Web Programming Lab</h3>
+                    </div>
+                    <div class="action-links">
+                        <a href="https://egyankosh.ac.in/simple-search?query=BCSL-147" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
+                    </div>
+                </div>
+
+                <div class="subject-card">
+                    <div class="card-header">
+                        <div class="code-row">
+                            <span class="course-code">BCS-040</span>
+                            <span class="course-credit">4 Cr</span>
+                            <span class="course-type">Theory</span>
+                        </div>
+                        <h3>Statistical Techniques</h3>
+                    </div>
+                    <div class="action-links">
+                        <a href="https://egyankosh.ac.in/simple-search?query=BCS-040" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
+                    </div>
+                </div>
+
+                <div class="subject-card">
+                    <div class="card-header">
+                        <div class="code-row">
+                            <span class="course-code">BCOC-131</span>
+                            <span class="course-credit">6 Cr</span>
+                            <span class="course-type">Theory</span>
+                        </div>
+                        <h3>Financial Accounting</h3>
+                    </div>
+                    <div class="action-links">
+                        <a href="https://egyankosh.ac.in/simple-search?query=BCOC-131" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
                     </div>
                 </div>
             </div>
 
             <!-- SEMESTER 5 -->
             <div id="sem5" class="grid-section">
+                <p class="sem-summary" style="grid-column:1/-1;">5 courses · 18 credits</p>
+
                 <div class="subject-card">
                     <div class="card-header">
-                        <span class="course-code">BCS-151</span>
+                        <div class="code-row">
+                            <span class="course-code">BCS-151</span>
+                            <span class="course-credit">4 Cr</span>
+                            <span class="course-type">Theory</span>
+                        </div>
                         <h3>Introduction to Software Engineering</h3>
                     </div>
                     <div class="action-links">
-                        <a href="https://egyankosh.ac.in/" target="_blank" class="btn-download primary-doc">Official Reference Book</a>
-                        <a href="#" class="btn-download">Agile & SDLC Execution Blocks</a>
+                        <a href="https://egyankosh.ac.in/simple-search?query=BCS-151" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
                     </div>
                 </div>
+
                 <div class="subject-card">
                     <div class="card-header">
-                        <span class="course-code">BCS-042</span>
-                        <h3>Introduction to Algorithm Design</h3>
+                        <div class="code-row">
+                            <span class="course-code">BCSL-159</span>
+                            <span class="course-credit">2 Cr</span>
+                            <span class="course-type">Practical</span>
+                        </div>
+                        <h3>Introduction to Algorithm Design Lab</h3>
                     </div>
                     <div class="action-links">
-                        <a href="https://egyankosh.ac.in/" target="_blank" class="btn-download primary-doc">Official Reference Book</a>
-                        <a href="#" class="btn-download">NP-Hard Analysis Framework</a>
+                        <a href="https://egyankosh.ac.in/simple-search?query=BCSL-159" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
                     </div>
                 </div>
+
                 <div class="subject-card">
                     <div class="card-header">
-                        <span class="course-code">BCOS-184</span>
+                        <div class="code-row">
+                            <span class="course-code">BCOS-184</span>
+                            <span class="course-credit">4 Cr</span>
+                            <span class="course-type">Theory</span>
+                        </div>
                         <h3>E-Commerce</h3>
                     </div>
                     <div class="action-links">
-                        <a href="https://egyankosh.ac.in/" target="_blank" class="btn-download primary-doc">Official Reference Book</a>
-                        <a href="#" class="btn-download">Security Protocols PDF</a>
+                        <a href="https://egyankosh.ac.in/simple-search?query=BCOS-184" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
+                    </div>
+                </div>
+
+                <div class="subject-card">
+                    <div class="card-header">
+                        <div class="code-row">
+                            <span class="course-code">MSEI-023</span>
+                            <span class="course-credit">4 Cr</span>
+                            <span class="course-type">Theory</span>
+                        </div>
+                        <h3>Cyber Security</h3>
+                    </div>
+                    <div class="action-links">
+                        <a href="https://egyankosh.ac.in/simple-search?query=MSEI-023" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
+                    </div>
+                </div>
+
+                <div class="subject-card">
+                    <div class="card-header">
+                        <div class="code-row">
+                            <span class="course-code">BECS-184</span>
+                            <span class="course-credit">4 Cr</span>
+                            <span class="course-type">Theory</span>
+                        </div>
+                        <h3>Data Analysis</h3>
+                    </div>
+                    <div class="action-links">
+                        <a href="https://egyankosh.ac.in/simple-search?query=BECS-184" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
                     </div>
                 </div>
             </div>
 
             <!-- SEMESTER 6 -->
             <div id="sem6" class="grid-section">
+                <p class="sem-summary" style="grid-column:1/-1;">3 courses · 20 credits</p>
+
                 <div class="subject-card">
                     <div class="card-header">
-                        <span class="course-code">BCOS-185</span>
+                        <div class="code-row">
+                            <span class="course-code">BCSP-165</span>
+                            <span class="course-credit">12 Cr</span>
+                            <span class="course-type">Project</span>
+                        </div>
+                        <h3>BCA Project Work</h3>
+                    </div>
+                    <div class="action-links">
+                        <a href="https://egyankosh.ac.in/simple-search?query=BCSP-165" target="_blank" class="btn-download primary-doc">eGyanKosh / Guidelines</a>
+                        <a href="https://www.ignou.ac.in/viewFile/SOCIS/programmeguide/BCA-NEW-July-2024.pdf" target="_blank" class="btn-download assignment-doc">Project Guidelines PDF</a>
+                    </div>
+                </div>
+
+                <div class="subject-card">
+                    <div class="card-header">
+                        <div class="code-row">
+                            <span class="course-code">MSEI-027</span>
+                            <span class="course-credit">4 Cr</span>
+                            <span class="course-type">Theory</span>
+                        </div>
+                        <h3>Digital Forensics</h3>
+                    </div>
+                    <div class="action-links">
+                        <a href="https://egyankosh.ac.in/simple-search?query=MSEI-027" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
+                    </div>
+                </div>
+
+                <div class="subject-card">
+                    <div class="card-header">
+                        <div class="code-row">
+                            <span class="course-code">BCOS-185</span>
+                            <span class="course-credit">4 Cr</span>
+                            <span class="course-type">Theory</span>
+                        </div>
                         <h3>Entrepreneurship</h3>
                     </div>
                     <div class="action-links">
-                        <a href="https://egyankosh.ac.in/" target="_blank" class="btn-download primary-doc">Official Reference Book</a>
-                        <a href="#" class="btn-download">Business Implementation Strategies</a>
-                    </div>
-                </div>
-                <div class="subject-card">
-                    <div class="card-header">
-                        <span class="course-code">BCSP-064</span>
-                        <h3>BCA Project Work Guidelines</h3>
-                    </div>
-                    <div class="action-links">
-                        <a href="http://www.ignou.ac.in" target="_blank" class="btn-download primary-doc">Project Synopsis Guidelines</a>
-                        <a href="#" class="btn-download">Approved Mock Project Portfolios</a>
+                        <a href="https://egyankosh.ac.in/simple-search?query=BCOS-185" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
                     </div>
                 </div>
             </div>
@@ -589,6 +967,7 @@
 
         <footer>
             <p>&copy; 2026 DADA Systems. Engineered for Computer Science Academic Architectures.</p>
+            <p style="margin-top:0.5rem;">Curriculum sourced from IGNOU's official <a href="https://www.ignou.ac.in/schools/programme/BCA_NEW" target="_blank">BCA_NEW programme page</a> · Not an official IGNOU website.</p>
         </footer>
     </div>
 
