@@ -65,14 +65,13 @@
             }
         }
 
-        /* Triggered via Javascript when timeline finishes */
         #loader.fade-out {
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
         }
 
-        /* --- STAGE 2: RESOURCE PORTAL --- */
+        /* --- STAGE 2: MAIN PORTAL --- */
         #main-content {
             opacity: 0;
             transform: translateY(25px);
@@ -104,7 +103,6 @@
 
         header h1 span {
             color: #388bfd;
-            position: relative;
         }
 
         header p {
@@ -122,12 +120,81 @@
             flex: 1;
         }
 
-        /* Navigation Grid Filter Layout */
+        /* --- ROUTINE COMPONENT STYLES --- */
+        .routine-section {
+            background-color: #111418;
+            border: 1px solid #21262d;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 3.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .section-title {
+            font-size: 1.6rem;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-bottom: 1px solid #21262d;
+            padding-bottom: 0.5rem;
+        }
+
+        .section-title span {
+            color: #2ea44f;
+        }
+
+        .routine-timeline {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .routine-card {
+            background-color: #171b21;
+            border: 1px solid #30363d;
+            border-left: 4px solid #388bfd;
+            border-radius: 6px;
+            padding: 1.25rem;
+            transition: transform 0.2s ease;
+        }
+
+        .routine-card:hover {
+            transform: scale(1.02);
+        }
+
+        .routine-card.coding { border-left-color: #2ea44f; }
+        .routine-card.theory { border-left-color: #ff7b72; }
+        .routine-card.rest { border-left-color: #bc8cff; }
+
+        .time-tag {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #8b949e;
+            text-transform: uppercase;
+            margin-bottom: 0.4rem;
+            display: block;
+        }
+
+        .routine-card h4 {
+            font-size: 1.1rem;
+            color: #ffffff;
+            margin-bottom: 0.4rem;
+        }
+
+        .routine-card p {
+            font-size: 0.88rem;
+            color: #8b949e;
+            line-height: 1.4;
+        }
+
+        /* --- STUDY REPOSITORY HUB STYLES --- */
         .tabs-container {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 0.6rem;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
@@ -165,7 +232,6 @@
             box-shadow: 0 0 15px rgba(31, 111, 235, 0.35);
         }
 
-        /* Multi-column Core Dashboard */
         .grid-section {
             display: none;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -191,13 +257,12 @@
             flex-direction: column;
             justify-content: space-between;
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease, border-color 0.3s ease;
         }
 
         .subject-card:hover {
             transform: translateY(-4px);
             border-color: #388bfd;
-            box-shadow: 0 6px 20px rgba(56, 139, 253, 0.1);
         }
 
         .card-header {
@@ -213,7 +278,6 @@
             padding: 0.3rem 0.65rem;
             border-radius: 4px;
             margin-bottom: 0.75rem;
-            letter-spacing: 0.05rem;
         }
 
         .card-header h3 {
@@ -247,7 +311,6 @@
         .btn-download:hover {
             background-color: #21262d;
             color: #ffffff;
-            border-color: #8b949e;
         }
 
         .btn-download.primary-doc {
@@ -280,11 +343,41 @@
     <!-- STAGE 2: Interactive Web Resource Dashboard -->
     <div id="main-content">
         <header>
-            <h1><span>BCA</span> Study Repository</h1>
-            <p>Unified structural catalog providing direct access to curriculum frameworks, books, reference structures, and assignment blocks.</p>
+            <h1><span>BCA</span> Architecture & Study Repository</h1>
+            <p>Unified structural catalog providing direct access to curriculum frameworks, timeline execution maps, and reference structures.</p>
         </header>
 
         <div class="container">
+            
+            <!-- DAILY ROUTINE PANEL -->
+            <div class="routine-section">
+                <h2 class="section-title">🕒 BCA Student <span>Daily Routine Blueprint</span></h2>
+                <div class="routine-timeline">
+                    <div class="routine-card theory">
+                        <span class="time-tag">06:00 AM - 08:30 AM</span>
+                        <h4>Heavy Core Logic Study</h4>
+                        <p>Focus on heavy mathematical concepts or architectural theories (e.g., BCS-012, MCS-202). Mind is fresh for complex formulas.</p>
+                    </div>
+                    <div class="routine-card coding">
+                        <span class="time-tag">10:00 AM - 01:00 PM</span>
+                        <h4>Core Lab & Dev Session</h4>
+                        <p>Open your IDE. Write codes in C, Python, Java, or Web Programming structures. Build execution projects and fix compilation errors.</p>
+                    </div>
+                    <div class="routine-card rest">
+                        <span class="time-tag">02:00 PM - 04:30 PM</span>
+                        <h4>BCA Assignment Processing</h4>
+                        <p>Work on mandatory IGNOU continuous evaluation logs, document compilation, or structure project synopses (BCSP-064).</p>
+                    </div>
+                    <div class="routine-card coding">
+                        <span class="time-tag">06:00 PM - 08:30 PM</span>
+                        <h4>Data Structures / Algorithms Practice</h4>
+                        <p>Dedicate time entirely to algorithmic processing structures (MCS-208), debugging layouts, or analyzing code complexity.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title" style="margin-bottom: 1.5rem;">📚 Structural Academic Blocks</h2>
+
             <!-- Filter Hub Controls -->
             <div class="tabs-container">
                 <button class="tab-btn active" onclick="switchSem('sem1')">SEM 1</button>
@@ -430,7 +523,7 @@
                     </div>
                     <div class="action-links">
                         <a href="https://egyankosh.ac.in/" target="_blank" class="btn-download primary-doc">Official Reference Book</a>
-                        <a href="#" class="btn-download">Full Stack JS Sandbox Framework</a>
+                        <a href="#" class="btn-download">HTML/CSS/JS Cheat Sheets</a>
                     </div>
                 </div>
             </div>
@@ -506,28 +599,20 @@
             const mainContent = document.getElementById('main-content');
 
             setTimeout(() => {
-                // Drop opacity and hide visibility cleanly
                 loader.classList.add('fade-out');
-                
-                // Transition inside dashboard panel viewport
                 mainContent.classList.add('reveal');
-                
-                // Allow scrolling after loader resolves
-                document.body.style.overflow = 'auto';
-            }, 3000); // 3000ms absolute lock time
+                document.body.style.overflow = 'auto'; // Allow scrolling after loading resolves
+            }, 3000); // 3000ms animation display lock
         });
 
         // Tab Filtering Handler
         function switchSem(semId) {
-            // Drop visibility of active grids
             const sections = document.querySelectorAll('.grid-section');
             sections.forEach(sec => sec.classList.remove('active-grid'));
 
-            // Remove highlighted buttons state
             const tabs = document.querySelectorAll('.tab-btn');
             tabs.forEach(tab => tab.classList.remove('active'));
 
-            // Inject targeted block configurations
             document.getElementById(semId).classList.add('active-grid');
             event.currentTarget.classList.add('active');
         }
