@@ -88,9 +88,21 @@ Feel free to open an Issue with your own idea too.
 
 ---
 
+## 👥 Contributors
+
+This list updates automatically — no one needs to edit it by hand. It pulls live from this repo's contributor graph.
+
+[![Contributors](https://contrib.rocks/image?repo=<prathamdadaa>/dada-bca-hub)](https://github.com/<prathamdadaa>/dada-bca-hub/graphs/contributors)
+
+*(Replace `<your-username>/dada-bca-hub` above with your actual GitHub username/repo name once it's live — the image will then auto-refresh with everyone's avatar as they contribute.)*
+
+You can also see the full, always-current list any time on GitHub's native **[Contributors](../../graphs/contributors)** page.
+
+---
+
 ## 📜 License
 
-This project is open source — feel free to use, fork, and adapt it for your own institute/course hub. *(Add a LICENSE file — MIT is a good simple default if you're not sure which to pick.)*
+This project is open source under the [MIT License](LICENSE) — feel free to use, fork, and adapt it for your own institute/course hub.
 
 ---
 
