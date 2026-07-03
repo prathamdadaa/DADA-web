@@ -92,7 +92,8 @@ Feel free to open an Issue with your own idea too.
 
 This list updates automatically — no one needs to edit it by hand. It pulls live from this repo's contributor graph.
 
-[![Contributors](https://contrib.rocks/image?repo=<prathamdadaa>/dada-bca-hub)](https://github.com/<prathamdadaa>/dada-bca-hub/graphs/contributors)
+[![Contributors](<img width="960" height="640" alt="image" src="https://github.com/user-attachments/assets/ba7f9ea2-511e-4a98-a570-0086cee44837" />
+repo=<prathamdadaa>/dada-bca-hub)](https://github.com/<prathamdadaa>/dada-bca-hub/graphs/contributors)
 
 *(Replace `<your-username>/dada-bca-hub` above with your actual GitHub username/repo name once it's live — the image will then auto-refresh with everyone's avatar as they contribute.)*
 
