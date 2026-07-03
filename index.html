@@ -4,541 +4,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DADA | IGNOU BCA Resource Hub</title>
-    <style>
-        /* Reset and Premium Dark Theme Configuration */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-        }
-
-        body {
-            background-color: #080a0c;
-            color: #f0f3f6;
-            overflow: hidden; /* Lock viewport scroll while screen is loading */
-        }
-
-        /* --- STAGE 1: DADA BLACK LOADING OVERLAY --- */
-        #loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background-color: #000000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 99999;
-            transition: opacity 0.8s cubic-bezier(0.645, 0.045, 0.355, 1), visibility 0.8s;
-            overflow: hidden;
-        }
-
-        /* Ambient radial glow pulsing behind the logo */
-        #loader::before {
-            content: "";
-            position: absolute;
-            width: 900px;
-            height: 900px;
-            background: radial-gradient(circle, rgba(56,139,253,0.18) 0%, rgba(56,139,253,0) 65%);
-            animation: ambientPulse 3.2s ease-in-out infinite;
-            pointer-events: none;
-        }
-
-        @keyframes ambientPulse {
-            0%, 100% { transform: scale(0.85); opacity: 0.5; }
-            50% { transform: scale(1.15); opacity: 1; }
-        }
-
-        .loader-logo-wrap {
-            position: relative;
-            display: inline-block;
-        }
-
-        .loader-logo {
-            position: relative;
-            font-size: 6rem;
-            font-weight: 900;
-            letter-spacing: -0.5rem;
-            color: #ffffff;
-            text-transform: uppercase;
-            opacity: 0;
-            transform: scale(0.92);
-            filter: blur(12px);
-            animation: dadaCinematicIntro 2.8s cubic-bezier(0.25, 1, 0.5, 1) forwards,
-                       dadaGlowPulse 1.8s ease-in-out 2.6s infinite,
-                       dadaFlicker 4.5s linear 2.8s infinite;
-        }
-
-        @keyframes dadaCinematicIntro {
-            0% {
-                opacity: 0;
-                letter-spacing: -0.6rem;
-                filter: blur(12px);
-                transform: scale(0.92);
-                text-shadow: 0 0 0 rgba(88, 166, 255, 0);
-            }
-            45% {
-                opacity: 1;
-                filter: blur(0px);
-                transform: scale(1.02);
-            }
-            100% {
-                opacity: 1;
-                letter-spacing: 1.8rem;
-                transform: scale(1);
-                text-shadow: 0 0 25px rgba(88, 166, 255, 0.55), 0 0 60px rgba(56, 139, 253, 0.25);
-            }
-        }
-
-        /* Soft breathing glow once the intro settles */
-        @keyframes dadaGlowPulse {
-            0%, 100% {
-                text-shadow: 0 0 25px rgba(88, 166, 255, 0.55), 0 0 60px rgba(56, 139, 253, 0.25);
-            }
-            50% {
-                text-shadow: 0 0 40px rgba(88, 166, 255, 0.85), 0 0 90px rgba(56, 139, 253, 0.45);
-            }
-        }
-
-        /* Occasional subtle glitch flicker for a premium tech feel */
-        @keyframes dadaFlicker {
-            0%, 92%, 100% { opacity: 1; transform: translate(0, 0) scale(1); }
-            93% { opacity: 0.85; transform: translate(-1px, 0) scale(1.002); }
-            94% { opacity: 1; transform: translate(1px, 0) scale(1); }
-            95% { opacity: 0.9; transform: translate(0, 1px) scale(1); }
-            96% { opacity: 1; transform: translate(0, 0) scale(1); }
-        }
-
-        /* Shine sweep that glides across the logo text */
-        .loader-logo::after {
-            content: "DADA";
-            position: absolute;
-            top: 0;
-            left: 0;
-            letter-spacing: inherit;
-            background: linear-gradient(
-                100deg,
-                transparent 30%,
-                rgba(255, 255, 255, 0.9) 48%,
-                rgba(255, 255, 255, 0.9) 52%,
-                transparent 70%
-            );
-            background-size: 300% 100%;
-            background-position: 200% 0;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            -webkit-text-fill-color: transparent;
-            opacity: 0;
-            animation: dadaShineSweep 2.4s ease-in-out 3s infinite;
-        }
-
-        @keyframes dadaShineSweep {
-            0% { background-position: 200% 0; opacity: 0; }
-            15% { opacity: 1; }
-            55% { background-position: -60% 0; opacity: 1; }
-            65% { opacity: 0; }
-            100% { background-position: -60% 0; opacity: 0; }
-        }
-
-        #loader.fade-out {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
-
-        /* --- STAGE 2: MAIN PORTAL --- */
-        #main-content {
-            opacity: 0;
-            transform: translateY(25px);
-            transition: opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.3s, transform 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.3s;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        #main-content.reveal {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        header {
-            background: linear-gradient(180deg, #111418 0%, #080a0c 100%);
-            padding: 3.5rem 1.5rem 2rem 1.5rem;
-            text-align: center;
-            border-bottom: 1px solid #1f242c;
-        }
-
-        header h1 {
-            font-size: 2.8rem;
-            color: #ffffff;
-            font-weight: 800;
-            letter-spacing: -0.05rem;
-            margin-bottom: 0.6rem;
-        }
-
-        header h1 span {
-            color: #388bfd;
-        }
-
-        header p {
-            color: #8b949e;
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .container {
-            max-width: 1300px;
-            margin: 0 auto;
-            padding: 2rem 1.5rem;
-            width: 100%;
-            flex: 1;
-        }
-
-        /* --- NOTICE BANNER --- */
-        .notice-banner {
-            background: linear-gradient(90deg, rgba(56,139,253,0.12), rgba(46,164,79,0.08));
-            border: 1px solid #30363d;
-            border-left: 4px solid #d29922;
-            border-radius: 8px;
-            padding: 1rem 1.25rem;
-            margin-bottom: 2rem;
-            font-size: 0.9rem;
-            color: #c9d1d9;
-            line-height: 1.5;
-        }
-
-        .notice-banner strong { color: #f0f3f6; }
-        .notice-banner a { color: #58a6ff; }
-
-        /* --- ROUTINE COMPONENT STYLES --- */
-        .routine-section {
-            background-color: #111418;
-            border: 1px solid #21262d;
-            border-radius: 12px;
-            padding: 2rem;
-            margin-bottom: 3.5rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-        }
-
-        .section-title {
-            font-size: 1.6rem;
-            color: #ffffff;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            border-bottom: 1px solid #21262d;
-            padding-bottom: 0.5rem;
-        }
-
-        .section-title span {
-            color: #2ea44f;
-        }
-
-        .routine-timeline {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 1.25rem;
-        }
-
-        .routine-card {
-            background-color: #171b21;
-            border: 1px solid #30363d;
-            border-left: 4px solid #388bfd;
-            border-radius: 6px;
-            padding: 1.25rem;
-            transition: transform 0.2s ease;
-        }
-
-        .routine-card:hover {
-            transform: scale(1.02);
-        }
-
-        .routine-card.coding { border-left-color: #2ea44f; }
-        .routine-card.theory { border-left-color: #ff7b72; }
-        .routine-card.rest { border-left-color: #bc8cff; }
-
-        .time-tag {
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: #8b949e;
-            text-transform: uppercase;
-            margin-bottom: 0.4rem;
-            display: block;
-        }
-
-        .routine-card h4 {
-            font-size: 1.1rem;
-            color: #ffffff;
-            margin-bottom: 0.4rem;
-        }
-
-        .routine-card p {
-            font-size: 0.88rem;
-            color: #8b949e;
-            line-height: 1.4;
-        }
-
-        /* --- STUDY REPOSITORY HUB STYLES --- */
-        .tabs-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0.6rem;
-            margin-bottom: 2rem;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        @media(min-width: 600px) {
-            .tabs-container {
-                grid-template-columns: repeat(6, 1fr);
-            }
-        }
-
-        .tab-btn {
-            background-color: #12161c;
-            color: #8b949e;
-            border: 1px solid #21262d;
-            padding: 0.8rem 0.5rem;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.85rem;
-            text-align: center;
-            transition: all 0.25s ease;
-        }
-
-        .tab-btn:hover {
-            background-color: #1c2128;
-            color: #c9d1d9;
-            border-color: #30363d;
-        }
-
-        .tab-btn.active {
-            background-color: #1f6feb;
-            color: #ffffff;
-            border-color: #58a6ff;
-            box-shadow: 0 0 15px rgba(31, 111, 235, 0.35);
-        }
-
-        .sem-summary {
-            text-align: center;
-            color: #7d8590;
-            font-size: 0.85rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .grid-section {
-            display: none;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .grid-section.active-grid {
-            display: grid;
-            animation: sectionAppear 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        @keyframes sectionAppear {
-            from { opacity: 0; transform: translateY(12px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .subject-card {
-            background-color: #111418;
-            border: 1px solid #21262d;
-            border-radius: 12px;
-            padding: 1.75rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            transition: transform 0.3s ease, border-color 0.3s ease;
-        }
-
-        .subject-card:hover {
-            transform: translateY(-4px);
-            border-color: #388bfd;
-        }
-
-        .card-header {
-            margin-bottom: 1.5rem;
-        }
-
-        .code-row {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-            margin-bottom: 0.75rem;
-        }
-
-        .course-code {
-            display: inline-block;
-            background-color: rgba(56, 139, 253, 0.12);
-            color: #58a6ff;
-            font-size: 0.75rem;
-            font-weight: 700;
-            padding: 0.3rem 0.65rem;
-            border-radius: 4px;
-        }
-
-        .course-credit {
-            display: inline-block;
-            background-color: rgba(46, 164, 79, 0.12);
-            color: #3fb950;
-            font-size: 0.72rem;
-            font-weight: 700;
-            padding: 0.3rem 0.55rem;
-            border-radius: 4px;
-        }
-
-        .course-type {
-            display: inline-block;
-            background-color: rgba(188, 140, 255, 0.12);
-            color: #bc8cff;
-            font-size: 0.72rem;
-            font-weight: 700;
-            padding: 0.3rem 0.55rem;
-            border-radius: 4px;
-        }
-
-        .card-header h3 {
-            font-size: 1.25rem;
-            color: #f0f3f6;
-            font-weight: 600;
-            line-height: 1.4;
-        }
-
-        .action-links {
-            display: flex;
-            flex-direction: column;
-            gap: 0.6rem;
-        }
-
-        .btn-download {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #171b21;
-            color: #c9d1d9;
-            text-decoration: none;
-            padding: 0.7rem;
-            border-radius: 6px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            border: 1px solid #30363d;
-            transition: all 0.2s ease;
-        }
-
-        .btn-download:hover {
-            background-color: #21262d;
-            color: #ffffff;
-        }
-
-        .btn-download.primary-doc {
-            background: #238636;
-            color: #ffffff;
-            border-color: #2ea44f;
-        }
-
-        .btn-download.primary-doc:hover {
-            background: #2ea44f;
-        }
-
-        .btn-download.assignment-doc {
-            background: #1f6feb;
-            color: #ffffff;
-            border-color: #388bfd;
-        }
-
-        .btn-download.assignment-doc:hover {
-            background: #388bfd;
-        }
-
-        footer {
-            text-align: center;
-            padding: 2.5rem;
-            color: #7d8590;
-            border-top: 1px solid #1f242c;
-            font-size: 0.85rem;
-            background-color: #0b0d10;
-        }
-
-        footer a { color: #58a6ff; text-decoration: none; }
-    </style>
+    <meta name="description" content="Unofficial IGNOU BCA_NEW resource hub. Course-by-course links to official eGyanKosh study material and the IGNOU assignment portal, organised by semester.">
+    <meta property="og:title" content="DADA | IGNOU BCA Resource Hub">
+    <meta property="og:description" content="Semester-wise links to official IGNOU BCA_NEW study material and assignments.">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <!-- STAGE 1: Cinematic Intro Screen -->
-    <div id="loader">
+    <!-- STAGE 1: Cinematic intro screen -->
+    <div id="loader" aria-hidden="true">
         <div class="loader-logo-wrap">
             <div class="loader-logo">DADA</div>
         </div>
     </div>
 
-    <!-- STAGE 2: Interactive Web Resource Dashboard -->
+    <!-- STAGE 2: Main site -->
     <div id="main-content">
         <header>
-            <h1><span>BCA</span> Architecture & Study Repository</h1>
+            <h1><span>BCA</span> Architecture &amp; Study Repository</h1>
             <p>Unified structural catalog providing direct access to curriculum frameworks, timeline execution maps, and reference structures — mapped to IGNOU's official BCA_NEW (ODL) programme structure.</p>
         </header>
 
-        <div class="container">
+        <main class="container">
 
-            <div class="notice-banner">
-                <strong>How this hub links to material:</strong> Every subject card below reflects IGNOU's official 39-course BCA_NEW curriculum (6 semesters, 99 credits). The green button opens an <strong>eGyanKosh</strong> search pre-filled with that exact course code — eGyanKosh is IGNOU's official free repository of Self-Learning Material PDFs. The blue button opens IGNOU's <strong>official Assignments</strong> portal. I can't host or fabricate "notes"/"solved assignment" PDFs myself since those aren't real files I have access to — but these two links get you the genuine, official source for every course. Full programme guide: <a href="https://www.ignou.ac.in/viewFile/SOCIS/programmeguide/BCA-NEW-July-2024.pdf" target="_blank">BCA-NEW Programme Guide (PDF)</a>.
-            </div>
+            <p class="notice-banner">
+                <strong>How this hub links to material:</strong> Every subject card below reflects IGNOU's official 39-course BCA_NEW curriculum (6 semesters, 99 credits). The green button opens an <strong>eGyanKosh</strong> search pre-filled with that exact course code — eGyanKosh is IGNOU's official free repository of Self-Learning Material PDFs. The blue button opens IGNOU's <strong>official Assignments</strong> portal. This site can't host or fabricate "notes" / "solved assignment" PDFs — these two links point to the genuine, official source for every course. Full programme guide: <a href="https://www.ignou.ac.in/viewFile/SOCIS/programmeguide/BCA-NEW-July-2024.pdf" target="_blank" rel="noopener">BCA-NEW Programme Guide (PDF)</a>.
+            </p>
 
             <!-- DAILY ROUTINE PANEL -->
-            <div class="routine-section">
-                <h2 class="section-title">🕒 BCA Student <span>Daily Routine Blueprint</span></h2>
+            <section class="routine-section" aria-labelledby="routine-heading">
+                <h2 class="section-title" id="routine-heading">🕒 BCA Student <span>Daily Routine Blueprint</span></h2>
                 <div class="routine-timeline">
                     <div class="routine-card theory">
-                        <span class="time-tag">06:00 AM - 08:30 AM</span>
-                        <h4>Heavy Core Logic Study</h4>
+                        <span class="time-tag">06:00 AM – 08:30 AM</span>
+                        <h3>Heavy Core Logic Study</h3>
                         <p>Focus on heavy mathematical concepts or architectural theories (e.g., BCS-012, MCS-202). Mind is fresh for complex formulas.</p>
                     </div>
                     <div class="routine-card coding">
-                        <span class="time-tag">10:00 AM - 01:00 PM</span>
-                        <h4>Core Lab & Dev Session</h4>
-                        <p>Open your IDE. Write codes in C, Python, Java, or Web Programming structures. Build execution projects and fix compilation errors.</p>
+                        <span class="time-tag">10:00 AM – 01:00 PM</span>
+                        <h3>Core Lab &amp; Dev Session</h3>
+                        <p>Open your IDE. Write code in C, Python, Java, or Web Programming structures. Build execution projects and fix compilation errors.</p>
                     </div>
                     <div class="routine-card rest">
-                        <span class="time-tag">02:00 PM - 04:30 PM</span>
-                        <h4>BCA Assignment Processing</h4>
+                        <span class="time-tag">02:00 PM – 04:30 PM</span>
+                        <h3>BCA Assignment Processing</h3>
                         <p>Work on mandatory IGNOU continuous evaluation logs, document compilation, or structure project synopses (BCSP-165).</p>
                     </div>
                     <div class="routine-card coding">
-                        <span class="time-tag">06:00 PM - 08:30 PM</span>
-                        <h4>Data Structures / Algorithms Practice</h4>
+                        <span class="time-tag">06:00 PM – 08:30 PM</span>
+                        <h3>Data Structures / Algorithms Practice</h3>
                         <p>Dedicate time entirely to algorithmic processing structures (MCS-208), debugging layouts, or analyzing code complexity.</p>
                     </div>
                 </div>
-            </div>
+            </section>
 
-            <h2 class="section-title" style="margin-bottom: 1.5rem;">📚 Structural Academic Blocks</h2>
+            <h2 class="section-title" id="courses-heading">📚 Structural Academic Blocks</h2>
 
-            <!-- Filter Hub Controls -->
-            <div class="tabs-container">
-                <button class="tab-btn active" onclick="switchSem('sem1')">SEM 1</button>
-                <button class="tab-btn" onclick="switchSem('sem2')">SEM 2</button>
-                <button class="tab-btn" onclick="switchSem('sem3')">SEM 3</button>
-                <button class="tab-btn" onclick="switchSem('sem4')">SEM 4</button>
-                <button class="tab-btn" onclick="switchSem('sem5')">SEM 5</button>
-                <button class="tab-btn" onclick="switchSem('sem6')">SEM 6</button>
+            <!-- Semester tab controls -->
+            <div class="tabs-container" role="tablist" aria-label="Select semester">
+                <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="sem1" id="tab-sem1" data-sem="sem1">SEM 1</button>
+                <button class="tab-btn" role="tab" aria-selected="false" aria-controls="sem2" id="tab-sem2" data-sem="sem2">SEM 2</button>
+                <button class="tab-btn" role="tab" aria-selected="false" aria-controls="sem3" id="tab-sem3" data-sem="sem3">SEM 3</button>
+                <button class="tab-btn" role="tab" aria-selected="false" aria-controls="sem4" id="tab-sem4" data-sem="sem4">SEM 4</button>
+                <button class="tab-btn" role="tab" aria-selected="false" aria-controls="sem5" id="tab-sem5" data-sem="sem5">SEM 5</button>
+                <button class="tab-btn" role="tab" aria-selected="false" aria-controls="sem6" id="tab-sem6" data-sem="sem6">SEM 6</button>
             </div>
 
             <!-- SEMESTER 1 -->
-            <div id="sem1" class="grid-section active-grid">
-                <p class="sem-summary" style="grid-column:1/-1;">6 courses · 26 credits</p>
+            <div id="sem1" class="grid-section active-grid" role="tabpanel" aria-labelledby="tab-sem1">
+                <p class="sem-summary">6 courses · 26 credits</p>
 
-                <div class="subject-card">
+                <article class="subject-card">
                     <div class="card-header">
                         <div class="code-row">
                             <span class="course-code">BCS-111</span>
@@ -548,12 +85,12 @@
                         <h3>Computer Basics and PC Software</h3>
                     </div>
                     <div class="action-links">
-                        <a href="https://egyankosh.ac.in/simple-search?query=BCS-111" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
-                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
+                        <a href="https://egyankosh.ac.in/simple-search?query=BCS-111" target="_blank" rel="noopener" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" rel="noopener" class="btn-download assignment-doc">Official Assignment Portal</a>
                     </div>
-                </div>
+                </article>
 
-                <div class="subject-card">
+                <article class="subject-card">
                     <div class="card-header">
                         <div class="code-row">
                             <span class="course-code">BCS-012</span>
@@ -563,12 +100,12 @@
                         <h3>Basic Mathematics</h3>
                     </div>
                     <div class="action-links">
-                        <a href="https://egyankosh.ac.in/simple-search?query=BCS-012" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
-                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
+                        <a href="https://egyankosh.ac.in/simple-search?query=BCS-012" target="_blank" rel="noopener" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" rel="noopener" class="btn-download assignment-doc">Official Assignment Portal</a>
                     </div>
-                </div>
+                </article>
 
-                <div class="subject-card">
+                <article class="subject-card">
                     <div class="card-header">
                         <div class="code-row">
                             <span class="course-code">BCSL-013</span>
@@ -578,12 +115,12 @@
                         <h3>Computer Basics and PC Software Lab</h3>
                     </div>
                     <div class="action-links">
-                        <a href="https://egyankosh.ac.in/simple-search?query=BCSL-013" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
-                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
+                        <a href="https://egyankosh.ac.in/simple-search?query=BCSL-013" target="_blank" rel="noopener" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" rel="noopener" class="btn-download assignment-doc">Official Assignment Portal</a>
                     </div>
-                </div>
+                </article>
 
-                <div class="subject-card">
+                <article class="subject-card">
                     <div class="card-header">
                         <div class="code-row">
                             <span class="course-code">FEG-02</span>
@@ -593,12 +130,12 @@
                         <h3>Foundation Course in English-2</h3>
                     </div>
                     <div class="action-links">
-                        <a href="https://egyankosh.ac.in/simple-search?query=FEG-02" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
-                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
+                        <a href="https://egyankosh.ac.in/simple-search?query=FEG-02" target="_blank" rel="noopener" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" rel="noopener" class="btn-download assignment-doc">Official Assignment Portal</a>
                     </div>
-                </div>
+                </article>
 
-                <div class="subject-card">
+                <article class="subject-card">
                     <div class="card-header">
                         <div class="code-row">
                             <span class="course-code">BEVAE-181</span>
@@ -608,12 +145,12 @@
                         <h3>Environmental Studies</h3>
                     </div>
                     <div class="action-links">
-                        <a href="https://egyankosh.ac.in/simple-search?query=BEVAE-181" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
-                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
+                        <a href="https://egyankosh.ac.in/simple-search?query=BEVAE-181" target="_blank" rel="noopener" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" rel="noopener" class="btn-download assignment-doc">Official Assignment Portal</a>
                     </div>
-                </div>
+                </article>
 
-                <div class="subject-card">
+                <article class="subject-card">
                     <div class="card-header">
                         <div class="code-row">
                             <span class="course-code">BEGLA-136</span>
@@ -623,17 +160,17 @@
                         <h3>English at the Workplace</h3>
                     </div>
                     <div class="action-links">
-                        <a href="https://egyankosh.ac.in/simple-search?query=BEGLA-136" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
-                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
+                        <a href="https://egyankosh.ac.in/simple-search?query=BEGLA-136" target="_blank" rel="noopener" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" rel="noopener" class="btn-download assignment-doc">Official Assignment Portal</a>
                     </div>
-                </div>
+                </article>
             </div>
 
             <!-- SEMESTER 2 -->
-            <div id="sem2" class="grid-section">
-                <p class="sem-summary" style="grid-column:1/-1;">5 courses · 16 credits</p>
+            <div id="sem2" class="grid-section" role="tabpanel" aria-labelledby="tab-sem2" hidden>
+                <p class="sem-summary">5 courses · 16 credits</p>
 
-                <div class="subject-card">
+                <article class="subject-card">
                     <div class="card-header">
                         <div class="code-row">
                             <span class="course-code">MCS-201</span>
@@ -643,12 +180,12 @@
                         <h3>Programming in C and Python</h3>
                     </div>
                     <div class="action-links">
-                        <a href="https://egyankosh.ac.in/simple-search?query=MCS-201" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
-                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
+                        <a href="https://egyankosh.ac.in/simple-search?query=MCS-201" target="_blank" rel="noopener" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" rel="noopener" class="btn-download assignment-doc">Official Assignment Portal</a>
                     </div>
-                </div>
+                </article>
 
-                <div class="subject-card">
+                <article class="subject-card">
                     <div class="card-header">
                         <div class="code-row">
                             <span class="course-code">MCSL-205</span>
@@ -658,12 +195,12 @@
                         <h3>C and Python Lab</h3>
                     </div>
                     <div class="action-links">
-                        <a href="https://egyankosh.ac.in/simple-search?query=MCSL-205" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
-                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
+                        <a href="https://egyankosh.ac.in/simple-search?query=MCSL-205" target="_blank" rel="noopener" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" rel="noopener" class="btn-download assignment-doc">Official Assignment Portal</a>
                     </div>
-                </div>
+                </article>
 
-                <div class="subject-card">
+                <article class="subject-card">
                     <div class="card-header">
                         <div class="code-row">
                             <span class="course-code">MCS-202</span>
@@ -673,12 +210,12 @@
                         <h3>Computer Organisation</h3>
                     </div>
                     <div class="action-links">
-                        <a href="https://egyankosh.ac.in/simple-search?query=MCS-202" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
-                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
+                        <a href="https://egyankosh.ac.in/simple-search?query=MCS-202" target="_blank" rel="noopener" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" rel="noopener" class="btn-download assignment-doc">Official Assignment Portal</a>
                     </div>
-                </div>
+                </article>
 
-                <div class="subject-card">
+                <article class="subject-card">
                     <div class="card-header">
                         <div class="code-row">
                             <span class="course-code">MCS-203</span>
@@ -688,12 +225,12 @@
                         <h3>Operating Systems</h3>
                     </div>
                     <div class="action-links">
-                        <a href="https://egyankosh.ac.in/simple-search?query=MCS-203" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
-                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
+                        <a href="https://egyankosh.ac.in/simple-search?query=MCS-203" target="_blank" rel="noopener" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" rel="noopener" class="btn-download assignment-doc">Official Assignment Portal</a>
                     </div>
-                </div>
+                </article>
 
-                <div class="subject-card">
+                <article class="subject-card">
                     <div class="card-header">
                         <div class="code-row">
                             <span class="course-code">MCSL-204</span>
@@ -703,17 +240,17 @@
                         <h3>Windows and Linux Lab</h3>
                     </div>
                     <div class="action-links">
-                        <a href="https://egyankosh.ac.in/simple-search?query=MCSL-204" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
-                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
+                        <a href="https://egyankosh.ac.in/simple-search?query=MCSL-204" target="_blank" rel="noopener" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" rel="noopener" class="btn-download assignment-doc">Official Assignment Portal</a>
                     </div>
-                </div>
+                </article>
             </div>
 
             <!-- SEMESTER 3 -->
-            <div id="sem3" class="grid-section">
-                <p class="sem-summary" style="grid-column:1/-1;">5 courses · 16 credits</p>
+            <div id="sem3" class="grid-section" role="tabpanel" aria-labelledby="tab-sem3" hidden>
+                <p class="sem-summary">5 courses · 16 credits</p>
 
-                <div class="subject-card">
+                <article class="subject-card">
                     <div class="card-header">
                         <div class="code-row">
                             <span class="course-code">MCS-208</span>
@@ -723,12 +260,12 @@
                         <h3>Data Structures and Algorithms</h3>
                     </div>
                     <div class="action-links">
-                        <a href="https://egyankosh.ac.in/simple-search?query=MCS-208" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
-                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
+                        <a href="https://egyankosh.ac.in/simple-search?query=MCS-208" target="_blank" rel="noopener" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" rel="noopener" class="btn-download assignment-doc">Official Assignment Portal</a>
                     </div>
-                </div>
+                </article>
 
-                <div class="subject-card">
+                <article class="subject-card">
                     <div class="card-header">
                         <div class="code-row">
                             <span class="course-code">MCSL-209</span>
@@ -738,12 +275,12 @@
                         <h3>Data Structures and Algorithms Lab</h3>
                     </div>
                     <div class="action-links">
-                        <a href="https://egyankosh.ac.in/simple-search?query=MCSL-209" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
-                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
+                        <a href="https://egyankosh.ac.in/simple-search?query=MCSL-209" target="_blank" rel="noopener" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" rel="noopener" class="btn-download assignment-doc">Official Assignment Portal</a>
                     </div>
-                </div>
+                </article>
 
-                <div class="subject-card">
+                <article class="subject-card">
                     <div class="card-header">
                         <div class="code-row">
                             <span class="course-code">MCS-207</span>
@@ -753,12 +290,12 @@
                         <h3>Database Management Systems</h3>
                     </div>
                     <div class="action-links">
-                        <a href="https://egyankosh.ac.in/simple-search?query=MCS-207" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
-                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
+                        <a href="https://egyankosh.ac.in/simple-search?query=MCS-207" target="_blank" rel="noopener" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" rel="noopener" class="btn-download assignment-doc">Official Assignment Portal</a>
                     </div>
-                </div>
+                </article>
 
-                <div class="subject-card">
+                <article class="subject-card">
                     <div class="card-header">
                         <div class="code-row">
                             <span class="course-code">BCS-131</span>
@@ -768,12 +305,12 @@
                         <h3>Programming in C++</h3>
                     </div>
                     <div class="action-links">
-                        <a href="https://egyankosh.ac.in/simple-search?query=BCS-131" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
-                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
+                        <a href="https://egyankosh.ac.in/simple-search?query=BCS-131" target="_blank" rel="noopener" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" rel="noopener" class="btn-download assignment-doc">Official Assignment Portal</a>
                     </div>
-                </div>
+                </article>
 
-                <div class="subject-card">
+                <article class="subject-card">
                     <div class="card-header">
                         <div class="code-row">
                             <span class="course-code">BCSL-135</span>
@@ -783,17 +320,17 @@
                         <h3>DBMS and C++ Lab</h3>
                     </div>
                     <div class="action-links">
-                        <a href="https://egyankosh.ac.in/simple-search?query=BCSL-135" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
-                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
+                        <a href="https://egyankosh.ac.in/simple-search?query=BCSL-135" target="_blank" rel="noopener" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" rel="noopener" class="btn-download assignment-doc">Official Assignment Portal</a>
                     </div>
-                </div>
+                </article>
             </div>
 
             <!-- SEMESTER 4 -->
-            <div id="sem4" class="grid-section">
-                <p class="sem-summary" style="grid-column:1/-1;">8 courses · 26 credits</p>
+            <div id="sem4" class="grid-section" role="tabpanel" aria-labelledby="tab-sem4" hidden>
+                <p class="sem-summary">8 courses · 26 credits</p>
 
-                <div class="subject-card">
+                <article class="subject-card">
                     <div class="card-header">
                         <div class="code-row">
                             <span class="course-code">MCS-206</span>
@@ -803,12 +340,12 @@
                         <h3>Object Oriented Programming using Java</h3>
                     </div>
                     <div class="action-links">
-                        <a href="https://egyankosh.ac.in/simple-search?query=MCS-206" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
-                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
+                        <a href="https://egyankosh.ac.in/simple-search?query=MCS-206" target="_blank" rel="noopener" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" rel="noopener" class="btn-download assignment-doc">Official Assignment Portal</a>
                     </div>
-                </div>
+                </article>
 
-                <div class="subject-card">
+                <article class="subject-card">
                     <div class="card-header">
                         <div class="code-row">
                             <span class="course-code">BCSL-146</span>
@@ -818,12 +355,12 @@
                         <h3>Object Oriented Programming using Java Lab</h3>
                     </div>
                     <div class="action-links">
-                        <a href="https://egyankosh.ac.in/simple-search?query=BCSL-146" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
-                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
+                        <a href="https://egyankosh.ac.in/simple-search?query=BCSL-146" target="_blank" rel="noopener" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" rel="noopener" class="btn-download assignment-doc">Official Assignment Portal</a>
                     </div>
-                </div>
+                </article>
 
-                <div class="subject-card">
+                <article class="subject-card">
                     <div class="card-header">
                         <div class="code-row">
                             <span class="course-code">BCS-041</span>
@@ -833,12 +370,12 @@
                         <h3>Fundamentals of Computer Networks</h3>
                     </div>
                     <div class="action-links">
-                        <a href="https://egyankosh.ac.in/simple-search?query=BCS-041" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
-                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
+                        <a href="https://egyankosh.ac.in/simple-search?query=BCS-041" target="_blank" rel="noopener" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" rel="noopener" class="btn-download assignment-doc">Official Assignment Portal</a>
                     </div>
-                </div>
+                </article>
 
-                <div class="subject-card">
+                <article class="subject-card">
                     <div class="card-header">
                         <div class="code-row">
                             <span class="course-code">BCS-042</span>
@@ -848,12 +385,12 @@
                         <h3>Introduction to Algorithm Design</h3>
                     </div>
                     <div class="action-links">
-                        <a href="https://egyankosh.ac.in/simple-search?query=BCS-042" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
-                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
+                        <a href="https://egyankosh.ac.in/simple-search?query=BCS-042" target="_blank" rel="noopener" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" rel="noopener" class="btn-download assignment-doc">Official Assignment Portal</a>
                     </div>
-                </div>
+                </article>
 
-                <div class="subject-card">
+                <article class="subject-card">
                     <div class="card-header">
                         <div class="code-row">
                             <span class="course-code">BCS-053</span>
@@ -863,12 +400,12 @@
                         <h3>Web Programming</h3>
                     </div>
                     <div class="action-links">
-                        <a href="https://egyankosh.ac.in/simple-search?query=BCS-053" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
-                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
+                        <a href="https://egyankosh.ac.in/simple-search?query=BCS-053" target="_blank" rel="noopener" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" rel="noopener" class="btn-download assignment-doc">Official Assignment Portal</a>
                     </div>
-                </div>
+                </article>
 
-                <div class="subject-card">
+                <article class="subject-card">
                     <div class="card-header">
                         <div class="code-row">
                             <span class="course-code">BCSL-147</span>
@@ -878,12 +415,12 @@
                         <h3>Web Programming Lab</h3>
                     </div>
                     <div class="action-links">
-                        <a href="https://egyankosh.ac.in/simple-search?query=BCSL-147" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
-                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
+                        <a href="https://egyankosh.ac.in/simple-search?query=BCSL-147" target="_blank" rel="noopener" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" rel="noopener" class="btn-download assignment-doc">Official Assignment Portal</a>
                     </div>
-                </div>
+                </article>
 
-                <div class="subject-card">
+                <article class="subject-card">
                     <div class="card-header">
                         <div class="code-row">
                             <span class="course-code">BCS-040</span>
@@ -893,12 +430,12 @@
                         <h3>Statistical Techniques</h3>
                     </div>
                     <div class="action-links">
-                        <a href="https://egyankosh.ac.in/simple-search?query=BCS-040" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
-                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
+                        <a href="https://egyankosh.ac.in/simple-search?query=BCS-040" target="_blank" rel="noopener" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" rel="noopener" class="btn-download assignment-doc">Official Assignment Portal</a>
                     </div>
-                </div>
+                </article>
 
-                <div class="subject-card">
+                <article class="subject-card">
                     <div class="card-header">
                         <div class="code-row">
                             <span class="course-code">BCOC-131</span>
@@ -908,17 +445,17 @@
                         <h3>Financial Accounting</h3>
                     </div>
                     <div class="action-links">
-                        <a href="https://egyankosh.ac.in/simple-search?query=BCOC-131" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
-                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
+                        <a href="https://egyankosh.ac.in/simple-search?query=BCOC-131" target="_blank" rel="noopener" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" rel="noopener" class="btn-download assignment-doc">Official Assignment Portal</a>
                     </div>
-                </div>
+                </article>
             </div>
 
             <!-- SEMESTER 5 -->
-            <div id="sem5" class="grid-section">
-                <p class="sem-summary" style="grid-column:1/-1;">5 courses · 18 credits</p>
+            <div id="sem5" class="grid-section" role="tabpanel" aria-labelledby="tab-sem5" hidden>
+                <p class="sem-summary">5 courses · 18 credits</p>
 
-                <div class="subject-card">
+                <article class="subject-card">
                     <div class="card-header">
                         <div class="code-row">
                             <span class="course-code">BCS-151</span>
@@ -928,12 +465,12 @@
                         <h3>Introduction to Software Engineering</h3>
                     </div>
                     <div class="action-links">
-                        <a href="https://egyankosh.ac.in/simple-search?query=BCS-151" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
-                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
+                        <a href="https://egyankosh.ac.in/simple-search?query=BCS-151" target="_blank" rel="noopener" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" rel="noopener" class="btn-download assignment-doc">Official Assignment Portal</a>
                     </div>
-                </div>
+                </article>
 
-                <div class="subject-card">
+                <article class="subject-card">
                     <div class="card-header">
                         <div class="code-row">
                             <span class="course-code">BCSL-159</span>
@@ -943,12 +480,12 @@
                         <h3>Introduction to Algorithm Design Lab</h3>
                     </div>
                     <div class="action-links">
-                        <a href="https://egyankosh.ac.in/simple-search?query=BCSL-159" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
-                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
+                        <a href="https://egyankosh.ac.in/simple-search?query=BCSL-159" target="_blank" rel="noopener" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" rel="noopener" class="btn-download assignment-doc">Official Assignment Portal</a>
                     </div>
-                </div>
+                </article>
 
-                <div class="subject-card">
+                <article class="subject-card">
                     <div class="card-header">
                         <div class="code-row">
                             <span class="course-code">BCOS-184</span>
@@ -958,12 +495,12 @@
                         <h3>E-Commerce</h3>
                     </div>
                     <div class="action-links">
-                        <a href="https://egyankosh.ac.in/simple-search?query=BCOS-184" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
-                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
+                        <a href="https://egyankosh.ac.in/simple-search?query=BCOS-184" target="_blank" rel="noopener" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" rel="noopener" class="btn-download assignment-doc">Official Assignment Portal</a>
                     </div>
-                </div>
+                </article>
 
-                <div class="subject-card">
+                <article class="subject-card">
                     <div class="card-header">
                         <div class="code-row">
                             <span class="course-code">MSEI-023</span>
@@ -973,12 +510,12 @@
                         <h3>Cyber Security</h3>
                     </div>
                     <div class="action-links">
-                        <a href="https://egyankosh.ac.in/simple-search?query=MSEI-023" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
-                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
+                        <a href="https://egyankosh.ac.in/simple-search?query=MSEI-023" target="_blank" rel="noopener" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" rel="noopener" class="btn-download assignment-doc">Official Assignment Portal</a>
                     </div>
-                </div>
+                </article>
 
-                <div class="subject-card">
+                <article class="subject-card">
                     <div class="card-header">
                         <div class="code-row">
                             <span class="course-code">BECS-184</span>
@@ -988,17 +525,17 @@
                         <h3>Data Analysis</h3>
                     </div>
                     <div class="action-links">
-                        <a href="https://egyankosh.ac.in/simple-search?query=BECS-184" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
-                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
+                        <a href="https://egyankosh.ac.in/simple-search?query=BECS-184" target="_blank" rel="noopener" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" rel="noopener" class="btn-download assignment-doc">Official Assignment Portal</a>
                     </div>
-                </div>
+                </article>
             </div>
 
             <!-- SEMESTER 6 -->
-            <div id="sem6" class="grid-section">
-                <p class="sem-summary" style="grid-column:1/-1;">3 courses · 20 credits</p>
+            <div id="sem6" class="grid-section" role="tabpanel" aria-labelledby="tab-sem6" hidden>
+                <p class="sem-summary">3 courses · 20 credits</p>
 
-                <div class="subject-card">
+                <article class="subject-card">
                     <div class="card-header">
                         <div class="code-row">
                             <span class="course-code">BCSP-165</span>
@@ -1008,12 +545,12 @@
                         <h3>BCA Project Work</h3>
                     </div>
                     <div class="action-links">
-                        <a href="https://egyankosh.ac.in/simple-search?query=BCSP-165" target="_blank" class="btn-download primary-doc">eGyanKosh / Guidelines</a>
-                        <a href="https://www.ignou.ac.in/viewFile/SOCIS/programmeguide/BCA-NEW-July-2024.pdf" target="_blank" class="btn-download assignment-doc">Project Guidelines PDF</a>
+                        <a href="https://egyankosh.ac.in/simple-search?query=BCSP-165" target="_blank" rel="noopener" class="btn-download primary-doc">eGyanKosh / Guidelines</a>
+                        <a href="https://www.ignou.ac.in/viewFile/SOCIS/programmeguide/BCA-NEW-July-2024.pdf" target="_blank" rel="noopener" class="btn-download assignment-doc">Project Guidelines PDF</a>
                     </div>
-                </div>
+                </article>
 
-                <div class="subject-card">
+                <article class="subject-card">
                     <div class="card-header">
                         <div class="code-row">
                             <span class="course-code">MSEI-027</span>
@@ -1023,12 +560,12 @@
                         <h3>Digital Forensics</h3>
                     </div>
                     <div class="action-links">
-                        <a href="https://egyankosh.ac.in/simple-search?query=MSEI-027" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
-                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
+                        <a href="https://egyankosh.ac.in/simple-search?query=MSEI-027" target="_blank" rel="noopener" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" rel="noopener" class="btn-download assignment-doc">Official Assignment Portal</a>
                     </div>
-                </div>
+                </article>
 
-                <div class="subject-card">
+                <article class="subject-card">
                     <div class="card-header">
                         <div class="code-row">
                             <span class="course-code">BCOS-185</span>
@@ -1038,43 +575,19 @@
                         <h3>Entrepreneurship</h3>
                     </div>
                     <div class="action-links">
-                        <a href="https://egyankosh.ac.in/simple-search?query=BCOS-185" target="_blank" class="btn-download primary-doc">eGyanKosh Study Material</a>
-                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" class="btn-download assignment-doc">Official Assignment Portal</a>
+                        <a href="https://egyankosh.ac.in/simple-search?query=BCOS-185" target="_blank" rel="noopener" class="btn-download primary-doc">eGyanKosh Study Material</a>
+                        <a href="https://www.ignou.ac.in/studentService/download/assignments" target="_blank" rel="noopener" class="btn-download assignment-doc">Official Assignment Portal</a>
                     </div>
-                </div>
+                </article>
             </div>
-        </div>
+        </main>
 
         <footer>
             <p>&copy; 2026 DADA Systems. Engineered for Computer Science Academic Architectures.</p>
-            <p style="margin-top:0.5rem;">Curriculum sourced from IGNOU's official <a href="https://www.ignou.ac.in/schools/programme/BCA_NEW" target="_blank">BCA_NEW programme page</a> · Not an official IGNOU website.</p>
+            <p class="footer-sub">Curriculum sourced from IGNOU's official <a href="https://www.ignou.ac.in/schools/programme/BCA_NEW" target="_blank" rel="noopener">BCA_NEW programme page</a> · Not an official IGNOU website.</p>
         </footer>
     </div>
 
-    <script>
-        // Timing Handler for the Black Cinematic Intro Screen
-        window.addEventListener('DOMContentLoaded', () => {
-            const loader = document.getElementById('loader');
-            const mainContent = document.getElementById('main-content');
-
-            setTimeout(() => {
-                loader.classList.add('fade-out');
-                mainContent.classList.add('reveal');
-                document.body.style.overflow = 'auto'; // Allow scrolling after loading resolves
-            }, 3000); // 3000ms animation display lock
-        });
-
-        // Tab Filtering Handler
-        function switchSem(semId) {
-            const sections = document.querySelectorAll('.grid-section');
-            sections.forEach(sec => sec.classList.remove('active-grid'));
-
-            const tabs = document.querySelectorAll('.tab-btn');
-            tabs.forEach(tab => tab.classList.remove('active'));
-
-            document.getElementById(semId).classList.add('active-grid');
-            event.currentTarget.classList.add('active');
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
